@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+
+#About{
+  font-size: 2em;
+  font: sans-serif;
+  color: #FF0000;
+  margin: 0.55em;
+  display: flex;
+  justify-content: flex-start;
+}
 /* .box{
   padding: 0.5em;
 }
