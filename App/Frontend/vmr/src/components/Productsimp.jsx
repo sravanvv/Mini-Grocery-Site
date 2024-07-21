@@ -6,8 +6,8 @@ export default function Productsimp() {
   const [productName, setProductName] = useState('');
   const [mrp, setMrp] = useState('');
   const [description, setDescription] = useState('');
-  const [products, setProducts] = useState([]);
-  const [selectedProductId, setSelectedProductId] = useState(null);
+  // const [products, setProducts] = useState([]);
+  // const [selectedProductId, setSelectedProductId] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
@@ -32,8 +32,6 @@ export default function Productsimp() {
       console.error('Error submitting data:', error);
     }
   }
-
-
 
   return (
     <div>
