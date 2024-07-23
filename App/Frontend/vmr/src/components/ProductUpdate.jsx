@@ -101,11 +101,11 @@ export default function Productsupdate() {
         <a className="text-lime-700"> Update</a>
       </h2>
       <form>
-        <div className="pt-4">
-          <label className="pt-2 ml-2">
+        <div className="pt-4 font-serif ml-2  text-lg font-medium">
+          <label className="pt-2 md: ml-2">
             Select Product:
             <select
-              className="ml-4 border-2 border-gray-300 focus:border-blue-500 hover:border-blue-300 rounded-lg transition duration-300"
+              className="ml-5 md:ml-2 border-2 border-gray-300 focus:border-blue-500 hover:border-blue-300 rounded-lg transition duration-300"
               value={productId}
               onChange={handleProductChange}
             >
@@ -119,11 +119,11 @@ export default function Productsupdate() {
           </label>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-          <div>
+          <div className="font-serif ml-2  text-lg font-medium">
             <label className="pt-2 ml-2">
               Product Id:
               <input
-                className="ml-4 border-2 border-gray-300 focus:border-blue-500 hover:border-blue-300 rounded-lg transition duration-300"
+                className="ml-12 md:ml-8 border-2 border-gray-300 focus:border-blue-500 hover:border-blue-300 rounded-lg transition duration-300"
                 type="text"
                 value={productId}
                 onChange={(e) => setProductId(e.target.value)}
@@ -131,46 +131,46 @@ export default function Productsupdate() {
               />
             </label>
           </div>
-          <div>
+          <div className="font-serif ml-2  text-lg font-medium">
             <label className="pt-2 ml-2">
               Product Name:
               <input
-                className="ml-4 border-2 border-gray-300 focus:border-blue-500 hover:border-blue-300 rounded-lg transition duration-300"
+                className="ml-4 md:ml-4 border-2 border-gray-300 focus:border-blue-500 hover:border-blue-300 rounded-lg transition duration-300"
                 type="text"
                 value={productName}
                 onChange={(e) => setProductName(e.target.value)}
               />
             </label>
           </div>
-          <div>
+          <div className="font-serif ml-2  text-lg font-medium">
             <label className="pt-2 ml-2">
               Mrp:
               <input
-                className="ml-4 border-2 border-gray-300 focus:border-blue-500 hover:border-blue-300 rounded-lg transition duration-300"
+                className="ml-24 md:ml-20 border-2 border-gray-300 focus:border-blue-500 hover:border-blue-300 rounded-lg transition duration-300"
                 type="number"
                 value={mrp}
                 onChange={(e) => setMrp(e.target.value)}
               />
             </label>
           </div>
-          <div>
+          <div className="font-serif ml-2  text-lg font-medium">
             <label className="pt-2 ml-2">
               Description:
               <input
-                className="ml-4 border-2 border-gray-300 focus:border-blue-500 hover:border-blue-300 rounded-lg transition duration-300"
+                className="ml-9 md:ml-10 border-2 border-gray-300 focus:border-blue-500 hover:border-blue-300 rounded-lg transition duration-300"
                 type="text"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
             </label>
           </div>
-          <div className="flex items-center justify-center ml-16 mt-4">
-            <button onClick={handleUpdateProduct} className="text-xl border-2 rounded-md p-2 hover:bg-slate-200 ml-24" type="submit">
+          <div className="grid grid-cols-2 md:grid-cols-2  md:ml-60 mt-4">
+            <button onClick={handleUpdateProduct} className="ml-2 w-40 text-xl border-2 rounded-md p-2 hover:bg-slate-200" type="submit">
               <a className="text-orange-500">Upd</a>
               <a className="text-sky-500">ate</a>
               <a className="text-lime-700"> Product</a>
             </button>
-            <button className="text-xl border-2 rounded-md p-1 ml-4 hover:bg-slate-200">
+            <button className="w-40 text-xl border-2 rounded-md p-1 md:ml-40 hover:bg-slate-200">
           <a href="/admin/">Admin Page</a>
         </button>
           </div>

@@ -6,9 +6,14 @@ export default function Productsimp() {
   const [productName, setProductName] = useState("");
   const [mrp, setMrp] = useState("");
   const [description, setDescription] = useState("");
+  const [error, setError] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
+    if (!productId || !productName || !mrp) {
+      setError('Please fill out all required fields');
+      return;
+    }
 
     try {
       const response = await fetch(
@@ -110,6 +115,7 @@ export default function Productsimp() {
           </div>
         </div>
       </form>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 }
