@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import '../index.css';
 
-export default function Productsupdate() {
+export default function Productsdelete() {
   const [productId, setProductId] = useState('');
   const [productName, setProductName] = useState('');
   const [mrp, setMrp] = useState('');
   const [description, setDescription] = useState('');
   const [products, setProducts] = useState([]);
   const [selectedProductId, setSelectedProductId] = useState(null);
+  const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   // Fetch all products for the dropdown
   const fetchProducts = async () => {
@@ -18,6 +22,11 @@ export default function Productsupdate() {
       setProducts(data);
     } catch (error) {
       console.error('Error fetching products:', error);
+      setError('Failed to fetch product details');
+      setShowError(true);
+      setTimeout(() => {
+        setShowError(false);
+      }, 3000);
     }
   };
 
@@ -37,6 +46,11 @@ export default function Productsupdate() {
         setDescription(product.description || '');
       } catch (error) {
         console.error('Error fetching product details:', error);
+        setError('Error fetching product details:', error);
+        setShowError(true);
+        setTimeout(() => {
+            setShowError(false);
+          }, 3000);
       }
     } else {
       // Clear form if no product ID is selected
@@ -51,9 +65,15 @@ export default function Productsupdate() {
     fetchProducts();
   }, []);
 
-  const handleDeleteProduct = async () => {
+  const handleDeleteProduct = async (event) => {
+    event.preventDefault();
     if (!productId) {
       console.error('Please provide a product ID to delete');
+      setError('Please provide a product ID to delete');
+      setShowError(true);
+      setTimeout(() => {
+        setShowError(false);
+      }, 3000);
       return;
     }
 
@@ -66,17 +86,88 @@ export default function Productsupdate() {
 
       if (response.ok) {
         console.log('Product deleted successfully');
+        setSuccess('Product deleted successfully!');
+        setShowSuccess(true);
+        setTimeout(() => {
+          setShowSuccess(false);
+        }, 3000);
         setProducts(products.filter((product) => product.productId !== productId));
+        setProductId(""); // Clear form inputs after successful Deletion
+      setProductName("");
+      setMrp("");
+      setDescription("");
       } else {
         console.error('Error deleting product:', response.statusText);
+        setError('Error deleting product:', response.statusText);
+        setShowError(true);
+        setTimeout(() => {
+            setShowError(false);
+          }, 3000);
       }
     } catch (error) {
       console.error('Error deleting product:', error);
+      setError('Error deleting product:', response.statusText);
+      setShowError(true);
+      setTimeout(() => {
+          setShowError(false);
+        }, 3000);
     }
   };
+  function removeAll(){
+    setProductId(""); 
+    setProductName("");
+    setMrp("");
+    setDescription("");
+  }
 
   return (
     <div>
+              {showError && (
+        <div
+          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+          role="alert"
+        >
+          <strong className="font-bold">Error: </strong>
+          <span className="block sm:inline">{error}</span>
+          <span
+            className="absolute top-0 bottom-0 right-0 px-4 py-3"
+            onClick={() => setShowError(false)}
+          >
+            <svg
+              className="fill-current h-6 w-6 text-red-500"
+              role="button"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <title>Close</title>
+              <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 10-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 001.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z" />
+            </svg>
+          </span>
+        </div>
+      )}
+      {showSuccess && (
+        <div
+          className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4"
+          role="alert"
+        >
+          <strong className="font-bold">Success: </strong>
+          <span className="block sm:inline">{success}</span>
+          <span
+            className="absolute top-0 bottom-0 right-0 px-4 py-3"
+            onClick={() => setShowSuccess(false)}
+          >
+            <svg
+              className="fill-current h-6 w-6 text-green-500"
+              role="button"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <title>Close</title>
+              <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 10-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 001.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z" />
+            </svg>
+          </span>
+        </div>
+      )}
       <h2 className=" mt-8 text-4xl font-bold mb-4 underline text-left md:text-center font-serif ">
         <a className="text-orange-500">Prod</a>
         <a className="text-sky-500">uct</a>
@@ -146,18 +237,20 @@ export default function Productsupdate() {
               />
             </label>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-2  md:ml-60 mt-4">
-            <button onClick={handleDeleteProduct} className="ml-2 w-40 text-xl border-2 rounded-md p-2 hover:bg-slate-200" type="submit">
+          <div className="grid grid-cols-1 md:grid-cols-3  md:ml-28 mt-4">
+            <button onClick={handleDeleteProduct} className="m-2 w-44 text-xl border-2 rounded-md p-1 hover:bg-slate-200" type="submit">
               <a className="text-orange-500">Del</a>
               <a className="text-sky-500">ete</a>
               <a className="text-lime-700"> Product</a>
             </button>
-            <button className="w-40 text-xl border-2 rounded-md p-1 md:ml-40 hover:bg-slate-200">
-          <a href="/admin/">Admin Page</a>
+        <button onClick={removeAll} className="m-2 w-44 text-xl border-2 rounded-md p-1 md:ml-36 hover:bg-slate-200">
+          Clear all
+        </button>
+        <button className="m-2 w-44 text-lg border-2 rounded-md p-1 md:ml-64 hover:bg-slate-200">
+          <a href="/admin/">Back to Admin Page</a>
         </button>
           </div>
         </div>
-
       </form>
     </div>
   );

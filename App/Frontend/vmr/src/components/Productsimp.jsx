@@ -6,12 +6,16 @@ export default function Productsimp() {
   const [productName, setProductName] = useState("");
   const [mrp, setMrp] = useState("");
   const [description, setDescription] = useState("");
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
+  const [showError, setShowError] = useState(false);
+  const [success, setSuccess] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
     if (!productId || !productName || !mrp) {
-      setError('Please fill out all required fields');
+      setError("Please fill out all required fields");
+      setShowError(true);
       return;
     }
 
@@ -37,10 +41,17 @@ export default function Productsimp() {
       }
 
       console.log("Data submitted successfully!");
+      setSuccess('Product added successfully!');
+      setShowSuccess(true);
+      setTimeout(() => {
+        setShowSuccess(false);
+      }, 3000);
       setProductId(""); // Clear form inputs after successful submission
       setProductName("");
       setMrp("");
       setDescription("");
+      setError("");
+      setShowError(false);
     } catch (error) {
       console.error("Error submitting data:", error);
     }
@@ -48,6 +59,53 @@ export default function Productsimp() {
 
   return (
     <div>
+      {showError && (
+        <div
+          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4"
+          role="alert"
+        >
+          <strong className="font-bold">Error: </strong>
+          <span className="block sm:inline">{error}</span>
+          <span
+            className="absolute top-0 bottom-0 right-0 px-4 py-3"
+            onClick={() => setShowError(false)}
+          >
+            <svg
+              className="fill-current h-6 w-6 text-red-500"
+              role="button"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <title>Close</title>
+              <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 10-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 001.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z" />
+            </svg>
+          </span>
+        </div>
+      )}
+      {showSuccess && (
+        <div
+          className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4"
+          role="alert"
+        >
+          <strong className="font-bold">Success: </strong>
+          <span className="block sm:inline">{success}</span>
+          <span
+            className="absolute top-0 bottom-0 right-0 px-4 py-3"
+            onClick={() => setShowSuccess(false)}
+          >
+            <svg
+              className="fill-current h-6 w-6 text-green-500"
+              role="button"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <title>Close</title>
+              <path d="M14.348 5.652a1 1 0 00-1.414 0L10 8.586 7.066 5.652a1 1 0 10-1.414 1.414L8.586 10l-2.934 2.934a1 1 0 001.414 1.414L10 11.414l2.934 2.934a1 1 0 001.414-1.414L11.414 10l2.934-2.934a1 1 0 000-1.414z" />
+            </svg>
+          </span>
+        </div>
+      )}
+
       <h2 className=" mt-8 text-4xl font-bold mb-4 underline text-left md:text-center font-serif ">
         <a className="text-orange-500">Prod</a>
         <a className="text-sky-500">uct</a>
@@ -104,18 +162,20 @@ export default function Productsimp() {
             </div>
           </div>
           <div className="flex items-center justify-center ml-16 mt-4">
-            <button className="text-xl border-2 rounded-md p-2 hover:bg-slate-200 ml-24" type="submit">
+            <button
+              className="text-xl border-2 rounded-md p-2 hover:bg-slate-200 ml-24"
+              type="submit"
+            >
               <a className="text-orange-500">Su</a>
               <a className="text-sky-500">bm</a>
               <a className="text-lime-700">it</a>
             </button>
             <button className="text-xl border-2 rounded-md p-1 ml-4 hover:bg-slate-200">
-          <a href="/admin/">Admin Page</a>
-        </button>
+              <a href="/admin/">Admin Page</a>
+            </button>
           </div>
         </div>
       </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 }
