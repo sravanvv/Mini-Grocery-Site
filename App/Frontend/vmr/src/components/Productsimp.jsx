@@ -16,6 +16,9 @@ export default function Productsimp() {
     if (!productId || !productName || !mrp) {
       setError("Please fill out all required fields");
       setShowError(true);
+      setTimeout(() => {
+        setShowError(false);
+      }, 3000); // Hide error message after 3 seconds
       return;
     }
 
@@ -41,7 +44,7 @@ export default function Productsimp() {
       }
 
       console.log("Data submitted successfully!");
-      setSuccess('Product added successfully!');
+      setSuccess("Product added successfully!");
       setShowSuccess(true);
       setTimeout(() => {
         setShowSuccess(false);
@@ -56,6 +59,12 @@ export default function Productsimp() {
       console.error("Error submitting data:", error);
     }
   };
+  function removeAll(){
+    setProductId(""); 
+    setProductName("");
+    setMrp("");
+    setDescription("");
+  }
 
   return (
     <div>
@@ -113,12 +122,12 @@ export default function Productsimp() {
       </h2>
       <form onSubmit={handleSubmit}>
         <div className="sm:grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-          <div className="mt-16 font-serif ml-8  text-lg font-medium">
+          <div className=" font-serif ml-2  text-lg font-medium">
             <div className="mt-2">
               <label>
                 Product Id:
                 <input
-                  className="border-yellow-600 border-2 rounded-lg ml-10 p-0.5"
+                  className="border-yellow-600 border-2 rounded-lg ml-11  "
                   type="text"
                   value={productId}
                   onChange={(e) => setProductId(e.target.value)}
@@ -129,7 +138,7 @@ export default function Productsimp() {
               <label>
                 Product Name:
                 <input
-                  className="border-yellow-600 border-2 rounded-lg ml-3 p-0.5"
+                  className="border-yellow-600 border-2 rounded-lg ml-4  "
                   type="text"
                   value={productName}
                   onChange={(e) => setProductName(e.target.value)}
@@ -137,12 +146,12 @@ export default function Productsimp() {
               </label>
             </div>
           </div>
-          <div className="md:mt-16 font-serif ml-8 text-lg font-medium sm:-mt-2">
+          <div className="md:mt-16 font-serif ml-2 text-lg font-medium sm:-mt-2">
             <div className="mt-2">
               <label>
                 Mrp:
                 <input
-                  className="border-yellow-600 border-2 rounded-lg ml-24 p-0.5"
+                  className="border-yellow-600 border-2 rounded-lg ml-24  "
                   type="number"
                   value={mrp}
                   onChange={(e) => setMrp(e.target.value)}
@@ -153,7 +162,7 @@ export default function Productsimp() {
               <label>
                 Description:
                 <input
-                  className="border-yellow-600 border-2 rounded-lg ml-10 p-0.5"
+                  className="border-yellow-600 border-2 rounded-lg ml-9  "
                   type="text"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
@@ -161,16 +170,22 @@ export default function Productsimp() {
               </label>
             </div>
           </div>
-          <div className="flex items-center justify-center ml-16 mt-4">
+          <div className="grid grid-cols-1 md:grid-cols-3  md:ml-60 mt-4">
             <button
-              className="text-xl border-2 rounded-md p-2 hover:bg-slate-200 ml-24"
+              className="m-2 w-44 text-xl border-2 rounded-md p-2 hover:bg-slate-200"
               type="submit"
             >
               <a className="text-orange-500">Su</a>
               <a className="text-sky-500">bm</a>
               <a className="text-lime-700">it</a>
             </button>
-            <button className="text-xl border-2 rounded-md p-1 ml-4 hover:bg-slate-200">
+            <button
+              onClick={removeAll}
+              className="m-2 w-44 text-xl border-2 rounded-md p-1 md:ml-36 hover:bg-slate-200"
+            >
+              Clear all
+            </button>
+            <button className="w-44 m-2 text-xl border-2 rounded-md p-1 md:ml-64 hover:bg-slate-200">
               <a href="/admin/">Admin Page</a>
             </button>
           </div>

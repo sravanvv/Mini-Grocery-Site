@@ -92,7 +92,15 @@ export default function ProductsUpdate() {
         setShowSuccess(true);
         setTimeout(() => {
           setShowSuccess(false);
-        }, 3000); // Hide success message after 3 seconds
+        }, 3000); 
+                setProductId(""); // Clear form inputs after successful Deletion
+      setProductName("");
+      setMrp("");
+      setDescription("");// Hide success message after 3 seconds
+      setProductId(""); // Clear form inputs after successful Deletion
+      setProductName("");
+      setMrp("");
+      setDescription("");
       } else {
         console.error("Error updating product:", response.statusText);
       }
@@ -110,7 +118,13 @@ export default function ProductsUpdate() {
   useEffect(() => {
     fetchProducts();
   }, []);
-
+  function removeAll(){
+    setProductId(""); 
+    setProductName("");
+    setMrp("");
+    setDescription("");
+  }
+  
   return (
     <div>
       {showError && (
@@ -229,13 +243,16 @@ export default function ProductsUpdate() {
               />
             </label>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-2  md:ml-60 mt-4">
-            <button onClick={handleUpdateProduct} className="ml-2 w-40 text-xl border-2 rounded-md p-2 hover:bg-slate-200" type="submit">
+          <div className="grid grid-cols-1 md:grid-cols-3  md:ml-60 mt-4">
+            <button onClick={handleUpdateProduct} className="m-2 w-44 text-xl border-2 rounded-md p-2 hover:bg-slate-200" type="submit">
               <a className="text-orange-500">Upd</a>
               <a className="text-sky-500">ate</a>
               <a className="text-lime-700"> Product</a>
             </button>
-            <button className="w-40 text-xl border-2 rounded-md p-1 md:ml-40 hover:bg-slate-200">
+            <button onClick={removeAll} className="m-2 w-44 text-xl border-2 rounded-md p-1 md:ml-36 hover:bg-slate-200">
+          Clear all
+        </button>
+            <button className="w-44 m-2 text-xl border-2 rounded-md p-1 md:ml-64 hover:bg-slate-200">
               <a href="/admin/">Admin Page</a>
             </button>
           </div>
