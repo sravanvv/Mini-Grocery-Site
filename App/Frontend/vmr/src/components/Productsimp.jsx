@@ -120,9 +120,9 @@ export default function Productsimp() {
         <a className="text-sky-500">uct</a>
         <a className="text-lime-700"> Import</a>
       </h2>
-      <form onSubmit={handleSubmit}>
+      <form >
         <div className="sm:grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-          <div className=" font-serif ml-2  text-lg font-medium">
+          <div className=" font-serif ml-2  text-lg font-medium md:mt-16">
             <div className="mt-2">
               <label>
                 Product Id:
@@ -172,7 +172,7 @@ export default function Productsimp() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3  md:ml-60 mt-4">
             <button
-              className="m-2 w-44 text-xl border-2 rounded-md p-2 hover:bg-slate-200"
+              className="m-2 w-44 text-xl border-2 rounded-md p-2 hover:bg-slate-200" onClick={handleSubmit}
               type="submit"
             >
               <a className="text-orange-500">Su</a>
